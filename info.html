@@ -6,46 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script src="./script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2a36eabb22.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <h1>Rock Paper Scissors</h1>
     </header>
 
+    <!-- Main -->
     <main>
         <div class="user-input">
-            <img src="url" alt="rock">
-            <div>
-                <img src="url" alt="paper">
-                <img src="url" alt="scissors">
+            <div class="container">
+                <i class="fas fa-hand-rock fa-fw" alt="rock" type="button" onclick="userPlay('rock')"></i>
+                <br>
+                <i class="fas fa-hand-paper fa-fw" alt="paper" type="button" onclick="userPlay('paper')"></i>
+                <i class="fas fa-hand-scissors fa-fw" alt="scissors" type="button" onclick="userPlay('scissors')"></i>
             </div>
         </div>
 
+        <!-- Game Round -->
+
         <div>
             <div>
-                <span class="round-indicator"></span>
-                <span class="round-indicator"></span>
-                <span class="round-indicator"></span>
-                <span class="round-indicator"></span>
-                <span class="round-indicator"></span>
+                <span class="round-indicator" id="round-one"></span>
+                <span class="round-indicator" id="round-two"></span>
+                <span class="round-indicator" id="round-three"></span>
+                <span class="round-indicator" id="round-four"></span>
+                <span class="round-indicator" id="round-five"></span>
             </div>
             <h2>First Round</h2>
         </div>
+        <!-- Game Score -->
 
         <div>
-            <h2>You</h2>
-            <h2>Me</h2>
-            <h2 id="user-score">0</h2>
-            <h2 id="comp-score">0</h2>
+            <div class="scoreboard">
+                <div>
+                    <h3>You</h3>
+                    <h3 id="user-score">0</h3>
+                </div>
+                <div>
+                    <h3>Me</h3>
+                    <h3 id="comp-score">0</h3>
+                </div>
+            </div>
         </div>
 
         <div>
-            <h2>We're drawing</h2>
+            <h2 id="whose-ahead">Let's Duel</h2>
         </div>
     </main>
+    
+    <!-- Footer -->
 
     <footer>
-        <h3>by Luke Storey</h3>
+        <a href="https://www.linkedin.com/in/luke-s-148020a5/">by Luke Storey</a>
     </footer>
 </body>
 </html>

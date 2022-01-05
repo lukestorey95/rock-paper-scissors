@@ -1,5 +1,6 @@
-// Generate computer's selection
+// Play match
 
+// Generate computer selection of rock paper or scissors
 function computerPlay() {
 
     function getRandom() {
@@ -14,60 +15,172 @@ function computerPlay() {
     return options[getRandom()];
 }
 
-// Collect selection from player
+// Allow user to input selection of rock paper or scissors
+let userSelection = ""
 
-function userPlay() {
-    return window.prompt("Rock, paper or scissors?").toLowerCase();
+function userPlay(selection) {
+    userSelection = selection;
+    console.log(userSelection);
+    playMatch();
 }
 
-// Play round to determine winner
+// Update round number
+let roundNumber = 0;
 
-let userScore = 0;
-let compScore = 0;
+let computerScore = 0;
+let playerScore = 0;
+let winner = "";
 
-function playRound(player, comp) {
-    player = userPlay();
-    comp = computerPlay();;
-    if (comp == player) {
-        return `It's a draw, you both picked ${player}`;
-    } else if (player == "rock" && comp == "scissors") {
-        userScore += 1;
-        return `You won! Rock beats Scissors`;
-    } else if (player == "rock" && comp == "paper") {
-        compScore += 1;
-        return `You loose! Rock is beaten by Paper`;
-    } else if (player == "paper" && comp == "rock") {
-        userScore += 1;
-        return `You won! Paper beats Rock`;
-    } else if (player == "paper" && comp == "scissors") {
-        compScore += 1;
-        return `You loose! Paper is beaten by Scissors`;
-    } else if (player == "scissors" && comp == "paper") {
-        userScore += 1;
-        return `You won! Scissors beat Paper`;
-    } else if (player == "scissors" && comp == "rock") {
-        compScore += 1;
-        return `You loose! Scissors are beaten by Rock`;
-    } else {
-        return "ERROR";
-    }
-}
-  
-// play best of 5 game
+// Check winner and change colour
+let winnerColor = ""
 
-function game() {
-    for (let gameRound = 1; gameRound <= 5; gameRound++) {
-        console.log(playRound());
-        console.log(`Your score is ${userScore}`);
-        console.log(`The computer's score is ${compScore}`);
+function setWinnerColor() {
+    if (winner === 'tie') {
+        winnerColor = "orange";
+    } else if (winner === 'player') {
+        winnerColor = "green";
+    } else if (winner === 'computer') {
+        winnerColor = "red";
     }
-    if (userScore > compScore) {
-        console.log(`You won with ${userScore} wins out of 5`);
-    } else if (userScore < compScore) {
-        console.log(`You lost with ${userScore} wins out of 5!`)
-    } else {
-        console.log('It was a tie, refresh to play again')
-    }
+    
 }
 
-game();
+// Compare selections and determine winner
+function playMatch() {
+    const player = userSelection;
+    const computer = computerPlay();
+    if(player === computer){
+        console.log('Tie');
+        winner = 'tie';
+    }
+    else if(player == 'rock'){
+        if(computer == 'paper'){
+            console.log('Computer Won');
+            computerScore++;
+            winner = 'computer';
+        }else{
+            console.log('Player Won');
+            playerScore++;
+            winner = 'player';
+        }
+    }
+    else if(player == 'scissors'){
+        if(computer == 'rock'){
+            console.log('Computer Won');
+            computerScore++;
+            winner = 'computer';
+        }else{
+            console.log('Player Won');
+            playerScore++;
+            winner = 'player';
+        }
+    }
+    else if(player == 'paper'){
+        if(computer == 'scissors'){
+            console.log('Computer Won');
+            computerScore++;
+            winner = 'computer';
+        }else{
+            console.log('Player Won');
+            playerScore++;
+            winner = 'player';
+        }
+    }
+    roundNumber++;
+    console.log(roundNumber);
+    setWinnerColor();
+    displayWinner();
+    updateRound();
+}   
+
+// Display match winner
+function displayWinner() {
+    switch (roundNumber) {
+        case 0:
+            document.getElementById("round-one").style.backgroundColor = winnerColor;
+            document.getElementById("round-two").style.backgroundColor = winnerColor;
+            document.getElementById("round-three").style.backgroundColor = winnerColor;
+            document.getElementById("round-four").style.backgroundColor = winnerColor;
+            document.getElementById("round-five").style.backgroundColor = winnerColor;
+            break;
+        case 1:
+            document.getElementById("round-one").style.backgroundColor = winnerColor;
+            break;
+        case 2:
+            document.getElementById("round-two").style.backgroundColor = winnerColor;
+            break;
+        case 3:
+            document.getElementById("round-three").style.backgroundColor = winnerColor;
+            break;
+        case 4:
+            document.getElementById("round-four").style.backgroundColor = winnerColor;
+            break;
+        case 5:
+            document.getElementById("round-five").style.backgroundColor = winnerColor;
+            break;
+        default:
+            console.log("colour update error");
+    }
+}
+
+// Play round
+
+let playerGameScore = 0;
+let computerGameScore = 0;
+
+// If round number is 5 update Game score, reset round number
+function updateGameScore() {
+    if (playerScore > computerScore) {
+        playerGameScore++;
+        document.getElementById("user-score").textContent = playerGameScore;
+        console.log(`player got ${playerScore} and computer got ${computerScore} so player +1`)
+    } else if (playerScore < computerScore) {
+        computerGameScore++;
+        document.getElementById("comp-score").textContent = computerGameScore;
+        console.log(`player got ${playerScore} and computer got ${computerScore} so computer +1`)
+    }
+}
+
+function resetRoundScore() {
+    computerScore = 0;
+    playerScore = 0;
+}
+
+// If round number is less than 5 start match
+function updateRound() {
+    if (roundNumber === 5) {
+        updateGameScore();
+        whoseWinning();
+    } else if (roundNumber === 6) {
+        roundNumber = 0;
+        winnerColor = "white";
+        displayWinner();
+        resetRoundScore();
+    }
+}
+
+let whoseAhead = "Let's  Duel"
+
+function whoseWinning() {
+    if (playerGameScore === 1 && computerGameScore === 0) {
+        whoseAhead = "First point to you"
+    } else if (playerGameScore === 0 && computerGameScore === 1) {
+        whoseAhead = "First point to me!"
+    } else if (playerGameScore === 2 && computerGameScore < 2) {
+        whoseAhead = "You've pulled ahead"
+    } else if (playerGameScore < 2 && computerGameScore === 2) {
+        whoseAhead = "I'm in the lead"
+    } else if (playerGameScore > computerGameScore) {
+        whoseAhead = "You're winning"
+    } else if (playerGameScore < computerGameScore) {
+        whoseAhead = "I'm winning"
+    }
+
+    document.getElementById("whose-ahead").textContent = whoseAhead;
+}
+
+
+// Play game
+
+// Start round
+// Reset
