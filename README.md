@@ -1,2 +1,3 @@
 # rock-paper-scissors
-Rock paper scissors command line app built with Javascript
+
+Rock paper scissors game built with Javascript

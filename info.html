@@ -19,24 +19,24 @@
     <main>
         <div class="user-input">
             <div class="container">
-                <i class="fas fa-hand-rock fa-fw" alt="rock" type="button" onclick="userPlay('rock')"></i>
+                <i class="fas fa-hand-rock fa-fw fa-flip-vertical" alt="rock" type="button" onclick="userPlay('rock')"></i>
                 <br>
-                <i class="fas fa-hand-paper fa-fw" alt="paper" type="button" onclick="userPlay('paper')"></i>
+                <i class="fas fa-hand-paper fa-fw fa-rotate-90" alt="paper" type="button" onclick="userPlay('paper')"></i>
                 <i class="fas fa-hand-scissors fa-fw" alt="scissors" type="button" onclick="userPlay('scissors')"></i>
             </div>
         </div>
 
         <!-- Game Round -->
 
-        <div>
-            <div>
+        <div class="round">
+            <div class="container" >
                 <span class="round-indicator" id="round-one"></span>
                 <span class="round-indicator" id="round-two"></span>
                 <span class="round-indicator" id="round-three"></span>
                 <span class="round-indicator" id="round-four"></span>
                 <span class="round-indicator" id="round-five"></span>
             </div>
-            <h2>First Round</h2>
+            <h2 id="game-number">First Round</h2>
         </div>
         <!-- Game Score -->
 
@@ -61,7 +61,7 @@
     <!-- Footer -->
 
     <footer>
-        <a href="https://www.linkedin.com/in/luke-s-148020a5/">by Luke Storey</a>
+        <a href="https://www.linkedin.com/in/luke-s-148020a5/" target="_blank">by Luke Storey</a>
     </footer>
 </body>
 </html>

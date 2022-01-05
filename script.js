@@ -146,16 +146,43 @@ function resetRoundScore() {
     playerScore = 0;
 }
 
+let gameNumber = 1
+let roundText = ""
+
+function updateGameText() {
+    switch (gameNumber) {
+        case 2:
+            roundText = "Second Round";
+            break;
+        case 3:
+            roundText = "Third Round";
+            break;
+        case 4:
+            roundText = "Fourth Round";
+            break;
+        case 5:
+            roundText = "Fifth Round";
+            break;
+        default:
+            roundText = "Round " + gameNumber;
+            break;
+    }
+    
+}
+
 // If round number is less than 5 start match
 function updateRound() {
     if (roundNumber === 5) {
         updateGameScore();
         whoseWinning();
+        gameNumber++;
+        updateGameText();
     } else if (roundNumber === 6) {
         roundNumber = 0;
         winnerColor = "white";
         displayWinner();
         resetRoundScore();
+        document.getElementById("game-number").textContent = roundText;
     }
 }
 
@@ -174,6 +201,8 @@ function whoseWinning() {
         whoseAhead = "You're winning"
     } else if (playerGameScore < computerGameScore) {
         whoseAhead = "I'm winning"
+    } else {
+        whoseAhead = "It's a tie"
     }
 
     document.getElementById("whose-ahead").textContent = whoseAhead;
